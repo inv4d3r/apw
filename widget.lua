@@ -28,6 +28,7 @@ local color_bg_mute = '#532a15' -- background color when muted
 local mixer         = 'pavucontrol' -- mixer command
 local show_text     = false     -- show percentages on progressbar
 local text_color    = '#fff' -- color of text
+local text_weight    = 'normal'    -- font weight
 
 -- End of configuration
 
@@ -43,7 +44,8 @@ color_bg = beautiful.apw_bg_color or color_bg
 color_mute = beautiful.apw_mute_fg_color or color_mute
 color_bg_mute = beautiful.apw_mute_bg_color or color_bg_mute
 show_text = beautiful.apw_show_text or show_text
-text_color = beautiful.apw_text_colot or text_color
+text_color = beautiful.apw_text_color or text_color
+text_weight = beautiful.apw_text_weight or text_weight
 
 local p = pulseaudio:Create()
 
@@ -84,7 +86,8 @@ local function _update()
 	pulseBar:set_value(p.Volume)
 	pulseWidget.setColor(p.Mute)
     if show_text then
-        pulseText:set_markup('<span color="'..text_color..'">'..math.ceil(p.Volume*100)..'%</span>')
+        pulseText:set_markup('<span font_weight="'..text_weight..'" color="'..text_color..'">'
+	    ..math.ceil(p.Volume*100)..'%</span>')
 
     end
 end
